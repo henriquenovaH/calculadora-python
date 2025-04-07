@@ -1,0 +1,200 @@
+import math
+
+# Função para exibir o menu principal
+def menu():
+    print("\nCalculadora")
+    print("1. Operações básicas (+, -, *, /)")
+    print("2. Resolver equação do 1º ou 2º grau")
+    print("3. Regra de três")
+    print("4. Regra de três composta")
+    print("5. Porcentagem")
+    print("6. Proporção")
+    print("7. Conjuntos")
+    print("8. Raiz quadrada")
+    print("9. Potenciação")
+    print("10. Sistema linear 2x2")
+    print("11. Sair")
+    return input("Escolha uma opção: ")
+
+# Função para realizar operações matemáticas básicas
+def operacoes_basicas():
+    print("Exemplo: 5 + 3 * 2")
+    expr = input("Digite a expressão matemática: ")
+    try:
+        resultado = eval(expr)  # Calcula a expressão fornecida
+        print(f"Resultado: {resultado}")
+    except Exception as e:
+        print("Erro na expressão:", e)
+
+# Função para resolver equações do primeiro e segundo grau
+def resolver_equacao():
+    tipo = input("Equação de 1º grau (1) ou 2º grau (2)? ")
+    
+    if tipo == "1":
+        print("Forma geral: ax + b = 0. Exemplo: 2x + 3 = 0")
+        a = float(input("Coeficiente de x (a): "))
+        b = float(input("Termo independente (b): "))
+        
+        if a == 0:
+            print("Erro: coeficiente 'a' não pode ser zero.")
+        else:
+            x = -b / a
+            print(f"Solução: x = {x:.2f}")
+    
+    elif tipo == "2":
+        print("Forma geral: ax² + bx + c = 0. Exemplo: x² - 5x + 6 = 0")
+        a = float(input("Coeficiente de x² (a): "))
+        b = float(input("Coeficiente de x (b): "))
+        c = float(input("Termo independente (c): "))
+
+        if a == 0:
+            print("Erro: coeficiente 'a' não pode ser zero em equação do 2º grau.")
+            return
+        
+        delta = b**2 - 4*a*c
+        
+        if delta < 0:
+            print("Não existem raízes reais.")
+        elif delta == 0:
+            x = -b / (2*a)
+            print(f"Uma raiz real: x = {x:.2f}")
+        else:
+            raiz_delta = math.sqrt(delta)
+            x1 = (-b + raiz_delta) / (2*a)
+            x2 = (-b - raiz_delta) / (2*a)
+            print(f"Duas raízes reais: x1 = {x1:.2f}, x2 = {x2:.2f}")
+    else:
+        print("Opção inválida.")
+
+# Função para resolver regra de três simples
+def regra_de_tres():
+    print("Exemplo: Se 4 maçãs custam 10 reais, quanto custam 6 maçãs?")
+    a = float(input("Digite o primeiro valor: "))
+    b = float(input("Digite o segundo valor: "))
+    c = float(input("Digite o terceiro valor: "))
+    
+    if a == 0:
+        print("Erro: não é possível dividir por zero.")
+    else:
+        d = (b * c) / a
+        print(f"O valor desconhecido é: {d:.2f}")
+
+# Função para resolver regra de três composta
+def regra_de_tres_composta():
+    print("\nRegra de três composta")
+    print("Exemplo 1:"
+          "\nSe 4 operários constroem um muro em 12 dias,"
+          "\nquanto tempo levarão 6 operários para construir o mesmo muro?"
+          "\n(Operários e tempo são inversamente proporcionais)")
+    
+    print("\nExemplo 2:"
+          "\nSe 2 carros consomem 20 litros de combustível em 3 horas,"
+          "\nquantos litros consumirão 5 carros no mesmo período?"
+          "\n(Carros e combustível são diretamente proporcionais)")
+    
+    n = int(input("\nQuantas variáveis de influência? "))
+    valores = []
+    
+    for i in range(n):
+        direcao = input(f"A variável {i+1} é diretamente (D) ou inversamente (I) proporcional? ").strip().upper()
+        valor = float(input(f"Digite o valor da variável {i+1}: "))
+        valores.append((direcao, valor))
+    
+    referencia = float(input("Digite o valor de referência: "))
+    resultado = referencia
+    
+    for direcao, valor in valores:
+        if direcao == 'D':
+            resultado *= valor
+        else:
+            resultado /= valor
+    
+    print(f"O resultado da regra de três composta é: {resultado:.2f}")
+
+
+# Função para calcular porcentagem
+def porcentagem():
+    valor = float(input("Digite o valor total: "))
+    percentual = float(input("Digite a porcentagem: "))
+    resultado = (valor * percentual) / 100
+    print(f"{percentual}% de {valor} é {resultado:.2f}")
+
+# Função para verificar se duas frações são proporcionais
+def proporcao():
+    print("Verificar se duas frações são proporcionais: A/B = C/D")
+    a = float(input("Digite o primeiro valor (A): "))
+    b = float(input("Digite o segundo valor (B): "))
+    c = float(input("Digite o terceiro valor (C): "))
+    d = float(input("Digite o quarto valor (D): "))
+    if a * d == b * c:
+        print("As frações são proporcionais.")
+    else:
+        print("As frações NÃO são proporcionais.")
+
+# Função para operações com conjuntos
+def conjuntos():
+    print("Operações básicas com conjuntos: união, interseção, diferença")
+    conjunto1 = set(map(int, input("Digite os elementos do primeiro conjunto separados por espaço: ").split()))
+    conjunto2 = set(map(int, input("Digite os elementos do segundo conjunto separados por espaço: ").split()))
+    print(f"União: {conjunto1 | conjunto2}")
+    print(f"Interseção: {conjunto1 & conjunto2}")
+    print(f"Diferença (A - B): {conjunto1 - conjunto2}")
+
+# Função para calcular raiz quadrada
+def raiz_quadrada():
+    print("Exemplo: √25 = 5")
+    num = float(input("Digite um número: "))
+    if num < 0:
+        print("Número inválido para raiz quadrada.")
+    else:
+        print(f"A raiz quadrada de {num} é {math.sqrt(num):.2f}")
+
+# Função para calcular potenciação
+def potenciacao():
+    print("Exemplo: 2^3 = 8")
+    base = float(input("Digite a base: "))
+    expoente = float(input("Digite o expoente: "))
+    resultado = base ** expoente
+    print(f"O resultado de {base}^{expoente} é {resultado:.2f}")
+
+# Função para resolver sistema linear
+def sistema_linear():
+    print("\nSistema Linear 2x2")
+    print("\nForma geral:")
+    print("a1*x + b1*y = c1")
+    print("a2*x + b2*y = c2")
+    print("\nExemplo:")
+    print("2x + 3y = 8")
+    print("4x -  y = 10")
+    
+    a1 = float(input("Digite o coeficiente a1: "))
+    b1 = float(input("Digite o coeficiente b1: "))
+    c1 = float(input("Digite o coeficiente c1: "))
+    a2 = float(input("Digite o coeficiente a2: "))
+    b2 = float(input("Digite o coeficiente b2: "))
+    c2 = float(input("Digite o coeficiente c2: "))
+    
+    determinante = a1 * b2 - a2 * b1
+    
+    if determinante == 0:
+        print("O sistema não tem solução única.")
+    else:
+        x = (c1 * b2 - c2 * b1) / determinante
+        y = (a1 * c2 - a2 * c1) / determinante
+        print(f"Solução: x = {x:.2f}, y = {y:.2f}")
+
+# Loop principal do programa
+while True:
+    opcao = menu()
+    if opcao == '1': operacoes_basicas()
+    elif opcao == '2': resolver_equacao()
+    elif opcao == '3': regra_de_tres()
+    elif opcao == '4': regra_de_tres_composta()
+    elif opcao == '5': porcentagem()
+    elif opcao == '6': proporcao()
+    elif opcao == '7': conjuntos()
+    elif opcao == '8': raiz_quadrada()
+    elif opcao == '9': potenciacao()
+    elif opcao == '10': sistema_linear()
+    elif opcao == '11': print("Saindo..."); break
+    else: print("Opção inválida. Tente novamente.")
